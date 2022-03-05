@@ -5,6 +5,19 @@ class Employee {
     this.id = id;
     this.email = email;
     }
+    getName() {
+        
+    }
+    getId() {
+
+    }
+    getEmail() {
+
+    }
+    getRole() {
+        return 'Employee'
+    }
+
 }
 
 // Make a class for Manager that also has an office number and will override getRole() to return Manager
@@ -23,17 +36,17 @@ class Engineer {
     constructor(github) {
         this.github = github;
     }
-    // getGithub() {
-    //     return 'Github';
-    // }
-    // getRole() {
-    //     return 'Engineer';
-    // }
+    getGithub() {
+      
+    }
+    getRole() {
+        return 'Engineer';
+    }
 }
 
-Engineer.prototype.getRole = function () {
-    return 'Engineer';
-}
+// Engineer.prototype.getRole = function () {
+//     return 'Engineer';
+// }
 
 // Make a class for Intern that also has school and a getSchool() function and getRole() that returns engineer
 class Intern {
@@ -41,7 +54,7 @@ class Intern {
         this.school = school;
     }
     getSchool() {
-        return 'school';
+        
     }
     getRole() {
         return 'Intern';
