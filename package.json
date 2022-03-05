@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -19,5 +19,11 @@
   "bugs": {
     "url": "https://github.com/AmberZimmerman/stacking_your_squad/issues"
   },
-  "homepage": "https://github.com/AmberZimmerman/stacking_your_squad#readme"
+  "homepage": "https://github.com/AmberZimmerman/stacking_your_squad#readme",
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.0"
+  }
 }
