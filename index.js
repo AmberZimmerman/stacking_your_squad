@@ -23,6 +23,16 @@ class Engineer {
     constructor(github) {
         this.github = github;
     }
+    // getGithub() {
+    //     return 'Github';
+    // }
+    // getRole() {
+    //     return 'Engineer';
+    // }
+}
+
+Engineer.prototype.getRole = function () {
+    return 'Engineer';
 }
 
 // Make a class for Intern that also has school and a getSchool() function and getRole() that returns engineer
@@ -30,4 +40,14 @@ class Intern {
     constructor(school) {
         this.school = school;
     }
+    getSchool() {
+        return 'school';
+    }
+    getRole() {
+        return 'Intern';
+    }
 }
+
+const employee = new Employee("Amber", 22, "ajz1221@gmail.com");
+
+console.log(employee.name);

@@ -1,0 +1,23 @@
+{
+  "name": "stacking_your_squad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmberZimmerman/stacking_your_squad.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AmberZimmerman/stacking_your_squad/issues"
+  },
+  "homepage": "https://github.com/AmberZimmerman/stacking_your_squad#readme"
+}
