@@ -1,55 +1,22 @@
 const inquirer = require("inquirer");
 
+const managerPrompts = require("./src/prompts/manager");
+const commonPrompts = require("./src/prompts/common");
+const engineerPrompts = require("./src/prompts/engineer");
+const internPrompts = require("./src/prompts/intern");
+const { additionalRole } = require("./src/prompts/single");
+
+
+
 console.log("Please build your team");
-const questions = () =>
-  inquirer.prompt([
-    {
-      type: "input",
-      message: `What is the team manager's name?`,
-      name: `managerName`,
-    },
-    {
-      type: "input",
-      message: `What is the team manager's id?`,
-      name: "managerId",
-    },
-    {
-      type: "input",
-      message: `What is the team manager's email?`,
-      name: "managerEmail",
-    },
-    {
-      type: "input",
-      message: `What is the team manager's office number?`,
-      name: "managerOffice",
-    },
-    {
-        type: 'list',
-        message: 'Choose an employee type.',
-        choices: ['Engineer', 'Intern', 'No more team memebers'],
-        name: 'license'
-    },
-    {
-        type: "input",
-        message: `What is the team member's name?`,
-        name: "engineerName",
-      },
-     {
-        type: "input",
-        message: `What is the team member's name?`,
-        name: "engineerName",
-    },
-    {
-        type: "input",
-        message: `What is the team manager's id?`,
-        name: "managerId",
-    },
-    {
-        type: "input",
-        message: `What is the team manager's email?`,
-        name: "managerEmail",
-    },
-  ]);
+const start = () => {
+  const prompts = [...commonPrompts, ...managerPrompts, additionalRole]
+
+  console.log(`xxxxxx`);
+  console.log(prompts);
+
+  return inquirer.prompt(prompts);
+};
 
 const generateHtml = ({
   managerName,
@@ -75,6 +42,6 @@ const generateHtml = ({
 `;
 };
 
-questions().then((data) => {
+start().then((data) => {
   console.log(data);
 });
