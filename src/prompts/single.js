@@ -1,7 +1,8 @@
-exports.additionalRole =
+exports.addNewPrompt=
     {
         type: 'list',
         message: 'Select another Role',
         choices: ['intern', 'engineer', 'manager', 'no more employees'],
-        name: 'additionalRole'
+        name: 'addNew'
     };
+
