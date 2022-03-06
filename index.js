@@ -83,20 +83,25 @@ const generateEmployeeCards = (employees) => {
   return employeeCards;
 };
 
-start().then((data) => {
+start().then(async(data) => {
   console.log(data);
   const employeeData = [data];
+
   if (data.addNew === "no more employees") {
     return;
   }
   let addMoreEmployees = data.addNew;
+  let additionalPrompts = getAdditionalPrompts(data.addNew);
+
+
   while (addMoreEmployees != "no more employees") {
-    addMoreEmployees = "no more employees";
+    const allDone = await nextStep([...commonPrompts, ...additionalPrompts, addNewPrompt]);
+    additionalPrompts = getAdditionalPrompts(allDone.addNew);
+    console.log(allDone);
+    addMoreEmployees = allDone.addNew;
+    employeeData.push(allDone)
   }
-  const newPrompts = getAdditionalPrompts(data.addNew);
   console.log("new variable");
-  console.log(newPrompts);
-  //   nextStep([...commonPrompts, ...newPrompts, addNewPrompt]);
   const finishedHtml = generateHtml(employeeData);
   console.log(finishedHtml);
   writeToFile("index.html", finishedHtml);
