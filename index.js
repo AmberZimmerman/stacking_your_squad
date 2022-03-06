@@ -1,4 +1,8 @@
 const inquirer = require("inquirer");
+const fs = require('fs');
+const util = require('util');
+const writeToFile = util.promisify(fs.writeFile);
+
 
 const managerPrompts = require("./src/prompts/manager");
 const commonPrompts = require("./src/prompts/common");
@@ -9,7 +13,7 @@ const { addNewPrompt } = require("./src/prompts/single");
 console.log("Please build your team");
 const start = () => {
   const prompts = [...commonPrompts, ...managerPrompts, addNewPrompt];
-return inquirer.prompt(prompts);
+  return inquirer.prompt(prompts);
 };
 
 const nextStep = (newPrompts) => {
@@ -43,25 +47,34 @@ const generateHtml = (data) => {
 
 <body>
 <h1>Hello World</h1>
+<ul>
+<li>${data.memberName}</li>
+<li>${data.memberId}</li>
+<li>${data.memberEmail}</li>
+<li>${data.managerOffice}</li>
+</ul>
+
 
 </body>
 `;
 };
 
-start().then((data) => {
+start()
+.then((data) => {
   console.log(data);
   if (data.addNew === "no more employees") {
     return;
   }
-let addMoreEmployees = data.addNew;
+  let addMoreEmployees = data.addNew;
   while (addMoreEmployees != "no more employees") {
-      addMoreEmployees = "no more employees";
+    addMoreEmployees = "no more employees";
   }
   const newPrompts = getAdditionalPrompts(data.addNew);
   console.log("new variable");
   console.log(newPrompts);
-//   nextStep([...commonPrompts, ...newPrompts, addNewPrompt]);
+  //   nextStep([...commonPrompts, ...newPrompts, addNewPrompt]);
   generateHtml(data);
   const finishedHtml = generateHtml(data);
-  console.log(finishedHtml)
+  console.log(finishedHtml);
+  writeToFile('index.html', finishedHtml);
 });
