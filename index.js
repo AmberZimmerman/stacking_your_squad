@@ -71,6 +71,7 @@ const generateEmployeeCards = (employees) => {
     <li class="list-group-item">${employee.addNew}</li>
       <li class="list-group-item">${employee.memberId}</li>
       <li class="list-group-item"><a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
+      <li class="list-group-item"><a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
       <li class="list-group-item">${employee.managerOffice}</li>
     </ul>
     <div class="card-body">
