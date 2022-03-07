@@ -66,11 +66,11 @@ const generateEmployeeCards = (employees) => {
         <div class="card-body">
             <h5 class="card-title">${employee.memberName}</h5>
             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
+        </div>lalal
     <ul class="list-group list-group-flush">
     <li class="list-group-item">${employee.addNew}</li>
       <li class="list-group-item">${employee.memberId}</li>
-      <li class="list-group-item">${employee.memberEmail}</li>
+      <li class="list-group-item"><a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
       <li class="list-group-item">${employee.managerOffice}</li>
     </ul>
     <div class="card-body">
@@ -82,6 +82,7 @@ const generateEmployeeCards = (employees) => {
   }
   return employeeCards;
 };
+
 
 start().then(async(data) => {
   console.log(data);
