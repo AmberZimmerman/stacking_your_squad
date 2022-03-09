@@ -106,5 +106,5 @@ start().then(async(firstPromptAnswers) => {
   console.log("new variable");
   const finishedHtml = generateHtml(questionAnswers);
   console.log(finishedHtml);
-  const response = await writeToFile("/dist/index.html", finishedHtml);
+  const response = await writeToFile("./dist/index.html", finishedHtml);
 });
