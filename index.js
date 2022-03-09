@@ -39,11 +39,11 @@ const getAdditionalPrompts = (addNew) => {
 const constructorMaker = (constructorMade) => {
   switch (constructorMade.title) {
     case "intern":
-      return internPrompts;
-    case "engineer":
-      return engineerPrompts;
+      return new Intern(constructorMade.internSchool, constructorMade.memberName, constructorMade.memberId,constructorMade.memberEmail);
+      case "engineer":
+      return new Engineer(constructorMade.engineerGithub, constructorMade.memberName, constructorMade.memberId,constructorMade.memberEmail);
     case "manager":
-      return managerPrompts;
+      return new Manager(constructorMade.managerOffice, constructorMade.memberName, constructorMade.memberId,constructorMade.memberEmail)
   }
 };
 
