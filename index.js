@@ -32,9 +32,9 @@ const getAdditionalPrompts = (addNew) => {
 
 
 // function to start to generate html page
-const generateHtml = (data) => {
+const generateHtml = (firstPromptAnswers) => {
 
-const finishedCards = generateEmployeeCards(data);
+const finishedCards = generateEmployeeCards(firstPromptAnswers);
 
 // The part of the html that won't be changing
   return `
@@ -59,6 +59,7 @@ ${finishedCards}
 
 const generateEmployeeCards = (employees) => {
   let employeeCards = "";
+  console.log(employees);``
   for (let index = 0; index < employees.length; index++) {
     const employee = employees[index];
     const newCard = 
@@ -81,15 +82,16 @@ const generateEmployeeCards = (employees) => {
 };
 
 
-start().then(async(data) => {
-  console.log(data);
-  const employeeData = [data];
-
-  if (data.addNew === "no more employees") {
+start().then(async(firstPromptAnswers) => {
+  console.log(firstPromptAnswers);
+  // Make an array that will hold all question answers starting with first answer object
+  const questionAnswers = [firstPromptAnswers];
+  // Check to see if no more employees, else ask specific prompts for employees
+  if (firstPromptAnswers.addNew === "no more employees") {
     return;
   }
-  let addMoreEmployees = data.addNew;
-  let additionalPrompts = getAdditionalPrompts(data.addNew);
+  let addMoreEmployees = firstPromptAnswers.addNew;
+  let additionalPrompts = getAdditionalPrompts(firstPromptAnswers.addNew);
 
   // find a way to update when we are adding more employees through the add new
   while (addMoreEmployees != "no more employees") {
@@ -98,10 +100,10 @@ start().then(async(data) => {
     additionalPrompts = getAdditionalPrompts(allDone.addNew);
     console.log(allDone);
     addMoreEmployees = allDone.addNew;
-    employeeData.push(allDone)
+    questionAnswers.push(allDone)
   }
   console.log("new variable");
-  const finishedHtml = generateHtml(employeeData);
+  const finishedHtml = generateHtml(questionAnswers);
   console.log(finishedHtml);
   const response = await writeToFile("index.html", finishedHtml);
 });
