@@ -1,0 +1,16 @@
+.row {
+    justify-content: center;
+}
+
+body {
+    margin: 60px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    background: rgb(55, 131, 141);
+    height: 60px;
+    align-content: center;
+    text-align: center;
+    color: white;
+}
