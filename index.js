@@ -11,6 +11,12 @@ const engineerPrompts = require("./src/prompts/engineer");
 const internPrompts = require("./src/prompts/intern");
 const { addNewPrompt } = require("./src/prompts/single");
 
+const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
+const Employee = require("./lib/employee");
+
+
 console.log("Please build your team");
 // function that starts from the begining
 const start = () => {
@@ -21,6 +27,17 @@ const start = () => {
 // create a function that will take the answer from the add another employee question, and then filter through the kinds of employees to determine next questions
 const getAdditionalPrompts = (addNew) => {
   switch (addNew) {
+    case "intern":
+      return internPrompts;
+    case "engineer":
+      return engineerPrompts;
+    case "manager":
+      return managerPrompts;
+  }
+};
+
+const constructorMaker = (constructorMade) => {
+  switch (constructorMade.title) {
     case "intern":
       return internPrompts;
     case "engineer":
@@ -69,11 +86,11 @@ const generateEmployeeCards = (employees) => {
           <div class="card-body">
             <h5 class="card-title">${employee.memberName}</div>
             <ul class="list-group list-group-flush">
-            <li class="list-group-item">${employee.addNew}</li>
-            <li class="list-group-item">${employee.memberId}</li>
-            <li class="list-group-item"><a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
-            <li class="list-group-item"><a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
-            <li class="list-group-item">${employee.managerOffice}</li>
+            <li class="list-group-item">Employee Role: ${employee.addNew}</li>
+            <li class="list-group-item">ID: ${employee.memberId}</li>
+            <li class="list-group-item">E-mail: <a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
+            <li class="list-group-item">Github: <a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
+            <li class="list-group-item">Office Number: ${employee.managerOffice}</li>
           </ul>
         
       </div>
@@ -84,8 +101,14 @@ const generateEmployeeCards = (employees) => {
 };
 
 
+
+
 start().then(async(firstPromptAnswers) => {
+  firstPromptAnswers.title = "manager";
   console.log(firstPromptAnswers);
+  let constructorMade = constructorMaker(firstPromptAnswers);
+  console.log(`This is ${constructorMade}`);
+
   // Make an array that will hold all question answers starting with first answer object
   const questionAnswers = [firstPromptAnswers];
   // Check to see if no more employees, else ask specific prompts for employees
@@ -109,3 +132,4 @@ start().then(async(firstPromptAnswers) => {
   console.log(finishedHtml);
   const response = await writeToFile("./dist/index.html", finishedHtml);
 });
+
