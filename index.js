@@ -50,9 +50,9 @@ const finishedCards = generateEmployeeCards(firstPromptAnswers);
 </head>
 
 <body>
-
+<div class="row">
 ${finishedCards}
-
+</div>
 </body>
 `;
 };
@@ -64,17 +64,18 @@ const generateEmployeeCards = (employees) => {
     const employee = employees[index];
     const newCard = 
     `<div class="card" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">${employee.memberName}</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>lalal
-    <ul class="list-group list-group-flush">
-    <li class="list-group-item">${employee.addNew}</li>
-      <li class="list-group-item">${employee.memberId}</li>
-      <li class="list-group-item"><a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
-      <li class="list-group-item"><a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
-      <li class="list-group-item">${employee.managerOffice}</li>
-    </ul>
+        <div class="column">
+          <div class="card-body">
+            <h5 class="card-title">${employee.memberName}</div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">${employee.addNew}</li>
+            <li class="list-group-item">${employee.memberId}</li>
+            <li class="list-group-item"><a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
+            <li class="list-group-item"><a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
+            <li class="list-group-item">${employee.managerOffice}</li>
+          </ul>
+        
+      </div>
   </div>`;
   employeeCards += newCard;
   }
@@ -105,5 +106,5 @@ start().then(async(firstPromptAnswers) => {
   console.log("new variable");
   const finishedHtml = generateHtml(questionAnswers);
   console.log(finishedHtml);
-  const response = await writeToFile("index.html", finishedHtml);
+  const response = await writeToFile("/dist/index.html", finishedHtml);
 });
