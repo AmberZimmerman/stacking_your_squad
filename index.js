@@ -1,8 +1,10 @@
+// linking external packages
 const inquirer = require("inquirer");
 const fs = require("fs");
 const util = require("util");
 const writeToFile = util.promisify(fs.writeFile);
 
+// exporting the prompts by using module.exports
 const managerPrompts = require("./src/prompts/manager");
 const commonPrompts = require("./src/prompts/common");
 const engineerPrompts = require("./src/prompts/engineer");
@@ -10,15 +12,13 @@ const internPrompts = require("./src/prompts/intern");
 const { addNewPrompt } = require("./src/prompts/single");
 
 console.log("Please build your team");
+// function that starts from the begining
 const start = () => {
   const prompts = [...commonPrompts, ...managerPrompts, addNewPrompt];
   return inquirer.prompt(prompts);
 };
 
-const nextStep = (newPrompts) => {
-  return inquirer.prompt(newPrompts);
-};
-
+// create a function that will take the answer from the add another employee question, and then filter through the kinds of employees to determine next questions
 const getAdditionalPrompts = (addNew) => {
   switch (addNew) {
     case "intern":
@@ -30,13 +30,13 @@ const getAdditionalPrompts = (addNew) => {
   }
 };
 
-// getAdditionalPrompts();
 
+// function to start to generate html page
 const generateHtml = (data) => {
 
 const finishedCards = generateEmployeeCards(data);
 
-
+// The part of the html that won't be changing
   return `
 <!DOCTYPE html>
 <html lang="en">
@@ -91,9 +91,10 @@ start().then(async(data) => {
   let addMoreEmployees = data.addNew;
   let additionalPrompts = getAdditionalPrompts(data.addNew);
 
-
+  // find a way to update when we are adding more employees through the add new
   while (addMoreEmployees != "no more employees") {
-    const allDone = await nextStep([...commonPrompts, ...additionalPrompts, addNewPrompt]);
+    // User must answer all questions before moving on in code thats what the await is for
+    const allDone = await inquirer.prompt([...commonPrompts, ...additionalPrompts, addNewPrompt]);
     additionalPrompts = getAdditionalPrompts(allDone.addNew);
     console.log(allDone);
     addMoreEmployees = allDone.addNew;
@@ -102,5 +103,5 @@ start().then(async(data) => {
   console.log("new variable");
   const finishedHtml = generateHtml(employeeData);
   console.log(finishedHtml);
-  writeToFile("index.html", finishedHtml);
+  const response = await writeToFile("index.html", finishedHtml);
 });

@@ -1,8 +1,5 @@
 # Stacking Your Squad
-### License:
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
-### License Description:
-[Click here for the most current description of this license](https://opensource.org/licenses/MIT)
+
 ### Link to deployed project:
 Link for the deployed project is unavailable
 ## Table of Contents: 
