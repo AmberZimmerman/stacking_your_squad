@@ -22,14 +22,20 @@ const managers = [];
 
 
 // function that starts from the begining
+
 console.log("Please build your team");
+
 const start = () => {
-  const prompts = [...commonPrompts, ...managerPrompts, addNewPrompt];
+
+  const prompts = [addNewPrompt];
+
   return inquirer.prompt(prompts);
+
 };
 
 
 // create a function that will take the answer from the add another employee question, and then filter through the kinds of employees to determine next questions
+
 const getAdditionalPrompts = (addNew) => {
 
   switch (addNew) {
@@ -98,13 +104,20 @@ ${finishedCards}
 
 const generateEmployeeCards = (questionAnswers) => {
   let employeeCards = "";
-  console.log("first prompt answers")
-  // console.log(firstPromptAnswers);
+  let newCard = "";
 
   for (let index = 0; index < questionAnswers.length; index++) {
     const employee = questionAnswers[index];
-    const newCard = 
-    `<div class="card" style="width: 18rem;">
+    
+    console.log("THIS IS QUESTION ANSWERS")
+    console.log(questionAnswers)
+    
+    switch (employee.title) {
+
+      case 'intern':
+
+
+      newCard = `<div class="card" style="width: 18rem;">
         <div class="column">
           <div class="card-body">
             <h5 class="card-title">${employee.memberName}</div>
@@ -112,14 +125,33 @@ const generateEmployeeCards = (questionAnswers) => {
             <li class="list-group-item">Employee Role: ${employee.addNew}</li>
             <li class="list-group-item">ID: ${employee.memberId}</li>
             <li class="list-group-item">E-mail: <a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
-            <li class="list-group-item">Github: <a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
+            <li class="list-group-item">School: ${employee.internSchool}</li>
+          </ul>
+        
+      </div>
+  </div>`;
+  employeeCards += newCard;
+  break;
+  case 'manager':
+
+
+      newCard = `<div class="card" style="width: 18rem;">
+        <div class="column">
+          <div class="card-body">
+            <h5 class="card-title">${employee.memberName}</div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">Employee Role: ${employee.addNew}</li>
+            <li class="list-group-item">ID: ${employee.memberId}</li>
+            <li class="list-group-item">E-mail: <a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
             <li class="list-group-item">Office Number: ${employee.managerOffice}</li>
           </ul>
         
       </div>
   </div>`;
   employeeCards += newCard;
+  break
   }
+}
 
   return employeeCards;
 };
@@ -128,35 +160,48 @@ const generateEmployeeCards = (questionAnswers) => {
 
 
 start().then(async(firstPromptAnswers) => {
-  firstPromptAnswers.title = "manager";
-
-  let constructorMade = constructorMaker(firstPromptAnswers);
+  
+  // adding a title property to first prompt answers based on what role the user selects
+  firstPromptAnswers.title = firstPromptAnswers.addNew;
+  console.log("----1st pr-----")
+  console.log(firstPromptAnswers)
+  
+  constructorMaker(firstPromptAnswers.title);
+  console.log("-----constructor made------")
 
 
   // Make an array that will hold all question answers starting with first answer object
-  const questionAnswers = [constructorMade];
+  const questionAnswers = [];
+  // const questionAnswers = [constructorMade];
   
   // Check to see if no more employees, else ask specific prompts for employees
   if (firstPromptAnswers.addNew === "no more employees") {
     return;
   }
-  let addMoreEmployees = firstPromptAnswers.addNew;
+  
+  let employeeTitle = firstPromptAnswers.addNew;
   let additionalPrompts = getAdditionalPrompts(firstPromptAnswers.addNew);
 
   // find a way to update when we are adding more employees through the add new
-  while (addMoreEmployees != "no more employees") {
+  
+  while (employeeTitle != "no more employees") {
     // User must answer all questions before moving on in code thats what the await is for
-    const allDone = await inquirer.prompt([...commonPrompts, ...additionalPrompts, addNewPrompt]);
-    allDone.title = addMoreEmployees;
-    additionalPrompts = getAdditionalPrompts(allDone.addNew);
-    console.log("all done")
-    console.log(allDone);
-    questionAnswers.push(allDone)
-    let constructorMadeMore = constructorMaker(allDone);
-    addMoreEmployees = allDone.addNew;
-    questionAnswers.push(constructorMadeMore)
-    console.log ("constructor made more")
-    console.log(constructorMadeMore)
+    const allOtherPromptAnswers = await inquirer.prompt([...commonPrompts, ...additionalPrompts, addNewPrompt]);
+    console.log("-----Employee title------")
+    console.log(employeeTitle)
+    
+    // adding a title property to the other prompt answers
+    allOtherPromptAnswers.title = employeeTitle;
+    
+    // continue to look if we are adding other employees
+    additionalPrompts = getAdditionalPrompts(allOtherPromptAnswers.addNew);
+    console.log("-------additional prompts------")
+    console.log(additionalPrompts)
+    
+    questionAnswers.push(allOtherPromptAnswers)
+    
+    employeeTitle = allOtherPromptAnswers.addNew;
+   
   }
   const finishedHtml = generateHtml(questionAnswers);
   console.log("index generated!");
