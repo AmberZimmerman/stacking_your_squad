@@ -122,7 +122,7 @@ const generateEmployeeCards = (questionAnswers) => {
           <div class="card-body">
             <h5 class="card-title">${employee.memberName}</div>
             <ul class="list-group list-group-flush">
-            <li class="list-group-item">Employee Role: ${employee.addNew}</li>
+            <li class="list-group-item">Employee Role: ${employee.title}</li>
             <li class="list-group-item">ID: ${employee.memberId}</li>
             <li class="list-group-item">E-mail: <a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
             <li class="list-group-item">School: ${employee.internSchool}</li>
@@ -132,7 +132,26 @@ const generateEmployeeCards = (questionAnswers) => {
   </div>`;
   employeeCards += newCard;
   break;
+  
   case 'manager':
+
+    newCard = `<div class="card" style="width: 18rem;">
+        <div class="column">
+          <div class="card-body">
+            <h5 class="card-title">${employee.memberName}</div>
+            <ul class="list-group list-group-flush">
+            <li class="list-group-item">Employee Role: ${employee.title}</li>
+            <li class="list-group-item">ID: ${employee.memberId}</li>
+            <li class="list-group-item">E-mail: <a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
+            <li class="list-group-item">Office Number: ${employee.managerOffice}</li>
+          </ul>
+        
+      </div>
+  </div>`;
+  employeeCards += newCard;
+  break
+
+  case 'engineer':
 
 
       newCard = `<div class="card" style="width: 18rem;">
@@ -140,10 +159,10 @@ const generateEmployeeCards = (questionAnswers) => {
           <div class="card-body">
             <h5 class="card-title">${employee.memberName}</div>
             <ul class="list-group list-group-flush">
-            <li class="list-group-item">Employee Role: ${employee.addNew}</li>
+            <li class="list-group-item">Employee Role: ${employee.title}</li>
             <li class="list-group-item">ID: ${employee.memberId}</li>
             <li class="list-group-item">E-mail: <a href="mailto:${employee.memberEmail}" class="card-link">${employee.memberEmail}</a></li>
-            <li class="list-group-item">Office Number: ${employee.managerOffice}</li>
+            <li class="list-group-item">Github: <a href="https://github.com/${employee.engineerGithub}" class="card-link">${employee.engineerGithub}</a></li>
           </ul>
         
       </div>
@@ -172,7 +191,7 @@ start().then(async(firstPromptAnswers) => {
 
   // Make an array that will hold all question answers starting with first answer object
   const questionAnswers = [];
-  // const questionAnswers = [constructorMade];
+
   
   // Check to see if no more employees, else ask specific prompts for employees
   if (firstPromptAnswers.addNew === "no more employees") {
