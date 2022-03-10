@@ -109,9 +109,6 @@ const generateEmployeeCards = (questionAnswers) => {
   for (let index = 0; index < questionAnswers.length; index++) {
     const employee = questionAnswers[index];
     
-    console.log("THIS IS QUESTION ANSWERS")
-    console.log(questionAnswers)
-    
     switch (employee.title) {
 
       case 'intern':
@@ -182,17 +179,12 @@ start().then(async(firstPromptAnswers) => {
   
   // adding a title property to first prompt answers based on what role the user selects
   firstPromptAnswers.title = firstPromptAnswers.addNew;
-  console.log("----1st pr-----")
-  console.log(firstPromptAnswers)
   
   constructorMaker(firstPromptAnswers.title);
-  console.log("-----constructor made------")
-
 
   // Make an array that will hold all question answers starting with first answer object
   const questionAnswers = [];
 
-  
   // Check to see if no more employees, else ask specific prompts for employees
   if (firstPromptAnswers.addNew === "no more employees") {
     return;
@@ -206,16 +198,13 @@ start().then(async(firstPromptAnswers) => {
   while (employeeTitle != "no more employees") {
     // User must answer all questions before moving on in code thats what the await is for
     const allOtherPromptAnswers = await inquirer.prompt([...commonPrompts, ...additionalPrompts, addNewPrompt]);
-    console.log("-----Employee title------")
-    console.log(employeeTitle)
     
     // adding a title property to the other prompt answers
     allOtherPromptAnswers.title = employeeTitle;
     
     // continue to look if we are adding other employees
     additionalPrompts = getAdditionalPrompts(allOtherPromptAnswers.addNew);
-    console.log("-------additional prompts------")
-    console.log(additionalPrompts)
+  
     
     questionAnswers.push(allOtherPromptAnswers)
     
