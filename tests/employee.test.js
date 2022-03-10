@@ -23,12 +23,5 @@ describe("Employee class", () => {
         expect(employee.getEmail()).toBe("ajz1221@gmail.com")
         });
     });
-    describe("getRole method", () => {
-        it("returns a role", () => {
-        const employee = new Employee("Amber", 22, "ajz1221@gmail.com");
-        console.log(employee.getRole());
-        expect(employee.getRole()).toBe('Employee')
-        });
-    });
 });
 
