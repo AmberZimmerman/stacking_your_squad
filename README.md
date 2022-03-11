@@ -1,29 +1,29 @@
 # Stacking Your Squad
 
-### Link to deployed project:
-Link for the deployed project is unavailable
+### Link to video demo:
+[Video demo link](https://drive.google.com/file/d/1dkVYjO1oYt4Z6aMn3xa9273rPobtBAv-/view?usp=sharing)
+
 ## Table of Contents: 
 * [Description](#description)
 * [Installation](#installation)
-* [Usage Instructions](#usage-instructions)
-* [License](#license)
-* [Contribution Guidelines](#contribution-guidelines)
 * [Tests](#tests)
 * [Questions](#questions)
 * [Screenshots](#screenshot)
+
 ### Description of the project:
-Stacking your squad is an application that allows you to easily add members of your team with different roles and different stats. User is prompted with a series of questions that allows them to choose the role of their teammate, then depending on that role, there will be always prompted with a series of questions that will ask for the name, id, and email of the team memeber. The user will also select the role of that person, which will have a series of specific questions based on that role. Once finished, a webpage will generate a user interface that displays the selected member roles and the answers to their questions. The email address will open in a new mail tab with the email address already populated. Also the github link will open to that users github.
+Stacking your squad is an application that allows you to easily add members of your team with different roles and different stats. User is prompted with a series of questions that allows them to choose the role of their teammate. Every role has to answer the name, id, and email. Also, there will be at least one additional question based on the specific role. For example, manager will be prompted for the office number, engineer will be prompted for a github username, and intern will be prompted for a school name. Once finished, an html webpage will be generated with a user interface that displays the selected member roles and the answers to their questions. The email address will open in a new mail tab with the email address already populated. Also the github link will open to that users github.
+
 ### Installation:
-In order to install the necessary dependencies, open the console and run the following:
+Copy the SSH key from the code drop down in this repository, and then open it in terminal and clone it using git clone. Open the folder in VS code, and in integrated terminal install the following dependencies:
 ```npm i, npm jest, npm inquirer```
-### Usage Instructions:
-copy the ssh key into their terminal
-### Contribution Guidelines:
-no contributions at this time
+
 ### Tests:
-In order to test open the console and run the following:
-```There are no tests to run for this project```
+In order to test open the test folder in the console and run the following:
+```npm run test```
+There will be four tests, one for the general employee category, one for manager, one for engineer, and one for intern.
+
 ### Questions:
-If you have any questions contact me on [GitHub](https://github.com/AmberZimmerman) 
+If you have any questions contact me on [GitHub](https://github.com/AmberZimmerman)
+
 ### Screenshot:
-![My Image](Project screenshot not available for this project) 
+![My Image](./dist/squad_screenshot.png) 
